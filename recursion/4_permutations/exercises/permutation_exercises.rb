@@ -13,4 +13,26 @@ def permutations(array)
   #
   # NOTE: the tests do not check for ordering, so a return of `[[1, 2], [2, 1]]`
   # will be treated the same as `[[2, 1], [1, 2]]`
+  res = []
+  per_helper(array, res, 0)
+  return res
+end
+
+def per_helper(array, result, index)
+  if index == array.length
+    result.push(array.dup)
+    return
+  end
+
+  i = index
+
+  while i < array.length
+    array[i], array[index] = array[index], array[i]
+
+    per_helper(array, result, index + 1)
+
+    array[index], array[i] = array[i], array[index]
+
+    i += 1
+  end
 end
